@@ -1,0 +1,514 @@
+,Nome,Partido,Estado
+5,Alan Rick,DEM,Acre
+6,Dra. Vanda Milani,SD,Acre
+7,Flaviano Melo,MDB,Acre
+8,Jéssica Sales,MDB,Acre
+9,Jesus Sérgio,PDT,Acre
+10,Mara Rocha,PSDB,Acre
+11,Pastor Manuel Marcos,PRB,Acre
+12,Perpetua Almeida,PC do B,Acre
+14,Arthur Lira,PP,Alagoas
+15,Isnaldo Bulhões,MDB,Alagoas
+16,JHC,PSB,Alagoas
+17,Marx Beltrão,PSD,Alagoas
+18,Nivaldo Albuquerque,PTB,Alagoas
+19,Paulão,PT,Alagoas
+20,Sérgio Toledo,PR,Alagoas
+21,Severino Pessôa,PRB,Alagoas
+22,Tereza Nelma,PSDB,Alagoas
+24,Acácio Favacho,PROS,Amapá
+25,Aline Gurgel,PRB,Amapá
+26,Andre Abdon,PP,Amapá
+27,Camilo Capiberibe,PSB,Amapá
+28,Leda Sadala,AVANTE,Amapá
+29,Luiz Carlos,PSDB,Amapá
+30,Professora Marcivania,PC do B,Amapá
+31,Vinícius,PR,Amapá
+33,Atila Lins,PP,Amazonas
+34,Bosco Saraiva,SD,Amazonas
+35,Capitão Alberto Neto,PRB,Amazonas
+36,Delegado Pablo,PSL,Amazonas
+37,José Ricardo,PT,Amazonas
+38,Marcelo Ramos,PR,Amazonas
+39,Sidney Leite,PSD,Amazonas
+40,Silas Câmara,PRB,Amazonas
+42,Adolfo Viana,PSDB,Bahia
+43,Afonso Florence,PT,Bahia
+44,Alex Santana,PDT,Bahia
+45,Alice Portugal,PC do B,Bahia
+46,Antonio Brito,PSD,Bahia
+47,Arthur Maia,DEM,Bahia
+48,Bacelar,PODE,Bahia
+49,Cacá Leão,PP,Bahia
+50,Charles Fernandes,PSD,Bahia
+51,Claudio Cajado,PP,Bahia
+52,Daniel Almeida,PC do B,Bahia
+53,Elmar,DEM,Bahia
+54,Felix Mendonça,PDT,Bahia
+55,Igor Kannario,PHS,Bahia
+56,João Bacelar,PR,Bahia
+57,João Roma,PRB,Bahia
+58,Jorge Solla,PT,Bahia
+59,José Nunes,PSD,Bahia
+60,Jose Rocha,PR,Bahia
+61,Josias Gomes,PT,Bahia
+62,Leur Lomanto Jr,DEM,Bahia
+63,Lídice da Mata,PSB,Bahia
+64,Marcelo Nilo,PSB,Bahia
+65,Marcio Marinho,PRB,Bahia
+66,Mário Negromonte Jr,PP,Bahia
+67,Otto Alencar Filho,PSD,Bahia
+68,Pastor Abílio Santana,PHS,Bahia
+69,Pastor Sargento Isidório,AVANTE,Bahia
+70,Paulo Azi,DEM,Bahia
+71,Pelegrino,PT,Bahia
+72,Prof. Dayane Pimentel,PSL,Bahia
+73,Raimundo Costa,PRP,Bahia
+74,Ronaldo Carletto,PP,Bahia
+75,Sérgio Brito,PSD,Bahia
+76,Tito,AVANTE,Bahia
+77,Uldúrico Júnior,PPL,Bahia
+78,Valmir Assunção,PT,Bahia
+79,Waldenor Pereira,PT,Bahia
+80,Zé Neto,PT,Bahia
+82,Aj Albuquerque,PP,Ceará
+83,André Figueiredo,PDT,Ceará
+84,Capitão Wagner,PROS,Ceará
+85,Celio Studart,PV,Ceará
+86,Denis Bezerra,PSB,Ceará
+87,Domingos Neto,PSD,Ceará
+88,Dr. Jaziel,PR,Ceará
+89,Eduardo Bismarck,PDT,Ceará
+90,Genecias Noronha,SD,Ceará
+91,Guimarães,PT,Ceará
+92,Heitor Freire,PSL,Ceará
+93,Idilvan,PDT,Ceará
+94,Jose Airton,PT,Ceará
+95,Júnior Mano,PATRI,Ceará
+96,Leonidas Cristino,PDT,Ceará
+97,Luizianne,PT,Ceará
+98,Mauro Filho,PDT,Ceará
+99,Moses Rodrigues,MDB,Ceará
+100,Pedro Bezerra,PTB,Ceará
+101,Robério Monteiro,PDT,Ceará
+102,Roberto Pessoa,PSDB,Ceará
+103,Vaidon Oliveira,PROS,Ceará
+105,Bia Kicis,PRP,Distrito federal
+106,Celina Leão,PP,Distrito federal
+107,Erika Kokay,PT,Distrito federal
+108,Flavia Arruda,PR,Distrito federal
+109,Julio Cesar,PRB,Distrito federal
+110,Luis Miranda,DEM,Distrito federal
+111,Paula Belmonte,PPS,Distrito federal
+112,Professor Israel,PV,Distrito federal
+114,Amaro Neto,PRB,Espírito santo
+115,Da Vitória,PPS,Espírito santo
+116,Dra. Soraya Manato,PSL,Espírito santo
+117,Evair de Melo,PP,Espírito santo
+118,Felipe Rigoni,PSB,Espírito santo
+119,Foletto,PSB,Espírito santo
+120,Helder Salomão,PT,Espírito santo
+121,Lauriete,PR,Espírito santo
+122,Norma Ayub,DEM,Espírito santo
+123,Sergio Vidigal,PDT,Espírito santo
+125,Adriano do Baldy,PP,Goiás
+126,Alcides Rodrigues,PRP,Goiás
+127,Célio Silveira,PSDB,Goiás
+128,Delegado Waldir,PSL,Goiás
+129,Dr. Zacarias Calil,DEM,Goiás
+130,Elias Vaz,PSB,Goiás
+131,Flavia Morais,PDT,Goiás
+132,Francisco Jr,PSD,Goiás
+133,Glaustin da Fokus,PSC,Goiás
+134,João Campos,PRB,Goiás
+135,José Nelto,PODE,Goiás
+136,Lucas Vergílio,SD,Goiás
+137,Magda Mofatto,PR,Goiás
+138,Major Vitor Hugo,PSL,Goiás
+139,Professor Alcides,PP,Goiás
+140,Rubens Otoni,PT,Goiás
+141,Zé Mario,DEM,Goiás
+143,Aluisio Mendes,PODE,Maranhão
+144,Andre Fufuca,PP,Maranhão
+145,Bira do Pindaré,PSB,Maranhão
+146,Cleber Verde,PRB,Maranhão
+147,Edilazio,PSD,Maranhão
+148,Eduardo Braide,PMN,Maranhão
+149,Gil Cutrim,PDT,Maranhão
+150,Hildo Rocha,MDB,Maranhão
+151,João Marcelo,MDB,Maranhão
+152,Josimar Maranhãozinho,PR,Maranhão
+153,Junior Lourenço,PR,Maranhão
+154,Junior Marreca Filho,PATRI,Maranhão
+155,Juscelino Filho,DEM,Maranhão
+156,Márcio Jerry,PC do B,Maranhão
+157,Pastor Gildenemyr,PMN,Maranhão
+158,Pedro Lucas Fernandes,PTB,Maranhão
+159,Rubens Junior,PC do B,Maranhão
+160,Zé Carlos,PT,Maranhão
+162,Carlos Bezerra,MDB,Mato Grosso
+163,Dr Leonardo,SD,Mato Grosso
+164,Emanuelzinho,PTB,Mato Grosso
+165,Jose Medeiros,PODE,Mato Grosso
+166,Juarez Costa,MDB,Mato Grosso
+167,Nelson Barbudo,PSL,Mato Grosso
+168,Neri Geller,PP,Mato Grosso
+169,Professora Rosa Neide,PT,Mato Grosso
+171,Beto Pereira,PSDB,Mato Grosso do Sul
+172,Dagoberto,PDT,Mato Grosso do Sul
+173,Dr. Luiz Ovando,PSL,Mato Grosso do Sul
+174,Fabio Trad,PSD,Mato Grosso do Sul
+175,Rose Modesto,PSDB,Mato Grosso do Sul
+176,Tereza Cristina,DEM,Mato Grosso do Sul
+177,Tio Trutis,PSL,Mato Grosso do Sul
+178,Vander Loubet,PT,Mato Grosso do Sul
+180,Aécio Neves,PSDB,Minas Gerais
+181,Alê Silva,PSL,Minas Gerais
+182,Andre Janones,AVANTE,Minas Gerais
+183,Aurea Carolina,PSOL,Minas Gerais
+184,Bilac Pinto,DEM,Minas Gerais
+185,Cabo Junio Amaral,PSL,Minas Gerais
+186,Charlles Evangelista,PSL,Minas Gerais
+187,Delegado Marcelo Freitas,PSL,Minas Gerais
+188,Diego Andrade,PSD,Minas Gerais
+189,Dimas Fabiano,PP,Minas Gerais
+190,Domingos Sávio,PSDB,Minas Gerais
+191,Doutor Frederico,PATRI,Minas Gerais
+192,Dr. Mário Heringer,PDT,Minas Gerais
+193,Eduardo Barbosa,PSDB,Minas Gerais
+194,Emidinho Madeira,PSB,Minas Gerais
+195,Eros Biondini,PROS,Minas Gerais
+196,Euclydes Pettersen,PSC,Minas Gerais
+197,Fabio Ramalho,MDB,Minas Gerais
+198,Franco Cartafina,PHS,Minas Gerais
+199,Fred Costa,PATRI,Minas Gerais
+200,Gilberto Abramo,PRB,Minas Gerais
+201,Greyce Elias,AVANTE,Minas Gerais
+202,Hercílio Coelho Diniz,MDB,Minas Gerais
+203,Igor Timo,PODE,Minas Gerais
+204,Julio Delgado,PSB,Minas Gerais
+205,Lafayette Andrada,PRB,Minas Gerais
+206,Léo Motta,PSL,Minas Gerais
+207,Leonardo Monteiro,PT,Minas Gerais
+208,Lincoln Portela,PR,Minas Gerais
+209,Lucas Gonzalez,NOVO,Minas Gerais
+210,Luis Tibe,AVANTE,Minas Gerais
+211,Marcelo Álvaro Antônio,PSL,Minas Gerais
+212,Marcelo Aro,PHS,Minas Gerais
+213,Margarida Salomão,PT,Minas Gerais
+214,Mauro Lopes,MDB,Minas Gerais
+215,Misael Varella,PSD,Minas Gerais
+216,Newton Cardoso Jr,MDB,Minas Gerais
+217,Odair Cunha,PT,Minas Gerais
+218,Padre João,PT,Minas Gerais
+219,Patrus Ananias,PT,Minas Gerais
+220,Paulo Abi Ackel,PSDB,Minas Gerais
+221,Paulo Guedes,PT,Minas Gerais
+222,Pinheirinho,PP,Minas Gerais
+223,Reginaldo Lopes,PT,Minas Gerais
+224,Rodrigo de Castro,PSDB,Minas Gerais
+225,Rogério Correia,PT,Minas Gerais
+226,Stefano Aguiar,PSD,Minas Gerais
+227,Subtenente Gonzaga,PDT,Minas Gerais
+228,Tiago Mitraud,NOVO,Minas Gerais
+229,Vilson da Fetaemg,PSB,Minas Gerais
+230,Weliton Prado,PROS,Minas Gerais
+231,Zé Silva,SD,Minas Gerais
+232,Zé Vitor,PMN,Minas Gerais
+234,Airton Faleiro,PT,Pará
+235,Beto Faro,PT,Pará
+236,Cássio Andrade,PSB,Pará
+237,Celso Sabino,PSDB,Pará
+238,Cristiano Vale,PR,Pará
+239,Delegado Éder Mauro,PSD,Pará
+240,Edmilson Rodrigues,PSOL,Pará
+241,Eduardo Costa,PTB,Pará
+242,Elcione,MDB,Pará
+243,Hélio Leite,DEM,Pará
+244,Joaquim Passarinho,PSD,Pará
+245,Júnior Ferrari,PSD,Pará
+246,Nilson Pinto,PSDB,Pará
+247,Olival Marques,DEM,Pará
+248,Paulo Bengtson,PTB,Pará
+249,Priante,MDB,Pará
+250,Vavá Martins,PRB,Pará
+252,Aguinaldo Ribeiro,PP,Paraíba
+253,Dr Damião,PDT,Paraíba
+254,Edna Henrique,PSDB,Paraíba
+255,Efraim Filho,DEM,Paraíba
+256,Frei Anastácio,PT,Paraíba
+257,Gervásio Maia,PSB,Paraíba
+258,Hugo,PRB,Paraíba
+259,Julian Lemos,PSL,Paraíba
+260,Pedro Cunha Lima,PSDB,Paraíba
+261,Ruy Carneiro,PSDB,Paraíba
+262,Wellington Roberto,PR,Paraíba
+263,Wilson Santiago,PTB,Paraíba
+265,Aliel Machado,PSB,Paraná
+266,Aline Sleutjes,PSL,Paraná
+267,Aroldo Martins,PRB,Paraná
+268,Boca Aberta,PROS,Paraná
+269,Christiane Yared,PR,Paraná
+270,Diego Garcia,PODE,Paraná
+271,Enio Verri,PT,Paraná
+272,Felipe Francischini,PSL,Paraná
+273,Filipe Barros,PSL,Paraná
+274,Giacobo,PR,Paraná
+275,Gleisi Lula,PT,Paraná
+276,Gustavo Fruet,PDT,Paraná
+277,Hermes Frangão Parcianello,MDB,Paraná
+278,Leandre,PV,Paraná
+279,Luciano Ducci,PSB,Paraná
+280,Luisa Canziani,PTB,Paraná
+281,Luiz Nishimori,PR,Paraná
+282,Luizão Goulart,PRB,Paraná
+283,Ney Leprevost,PSD,Paraná
+284,Paulo Martins,PSC,Paraná
+285,Pedro Lupion,DEM,Paraná
+286,Ricardo Barros,PP,Paraná
+287,Rubens Bueno,PPS,Paraná
+288,Sandro Alex,PSD,Paraná
+289,Sargento Fahur,PSD,Paraná
+290,Schiavinato,PP,Paraná
+291,Sérgio Souza,MDB,Paraná
+292,Toninho Wandscheer,PROS,Paraná
+293,Vermelho,PSD,Paraná
+294,Zeca Dirceu,PT,Paraná
+296,André de Paula,PSD,Pernambuco
+297,Andre Ferreira,PSC,Pernambuco
+298,Augusto Coutinho,SD,Pernambuco
+299,Bispo Ossesio,PRB,Pernambuco
+300,Carlos Veras,PT,Pernambuco
+301,Daniel Coelho,PPS,Pernambuco
+302,Danilo Cabral,PSB,Pernambuco
+303,Eduardo da Fonte,PP,Pernambuco
+304,Felipe Carreras,PSB,Pernambuco
+305,Fernando Filho,DEM,Pernambuco
+306,Fernando Monteiro,PP,Pernambuco
+307,Fernando Rodolfo,PHS,Pernambuco
+308,Gonzaga Patriota,PSB,Pernambuco
+309,João Campos,PSB,Pernambuco
+310,Luciano Bivar,PSL,Pernambuco
+311,Marília Arraes,PT,Pernambuco
+312,Pastor Eurico,PATRI,Pernambuco
+313,Raul Henry,MDB,Pernambuco
+314,Renildo Calheiros,PC do B,Pernambuco
+315,Ricardo Teobaldo,PODE,Pernambuco
+316,Sebastião Oliveira,PR,Pernambuco
+317,Silvio Costa Filho,PRB,Pernambuco
+318,Tadeu Alencar,PSB,Pernambuco
+319,Túlio Gadêlha,PDT,Pernambuco
+320,Wolney Queiroz,PDT,Pernambuco
+322,Assis Carvalho,PT,Piauí
+323,Átila Lira,PSB,Piauí
+324,Capitão Fábio Abreu,PR,Piauí
+325,Dra. Marina,PTC,Piauí
+326,Flavio Nogueira,PDT,Piauí
+327,Iracema Portella,PP,Piauí
+328,Júlio Cesar,PSD,Piauí
+329,Marcos Aurélio Sampaio,MDB,Piauí
+330,Margarete Coelho,PP,Piauí
+331,Rejane Dias,PT,Piauí
+333,Alessandro Molon,PSB,Rio de Janeiro
+334,Alexandre Serfiotis,PSD,Rio de Janeiro
+335,Altineu Cortes,PR,Rio de Janeiro
+336,Aureo,SD,Rio de Janeiro
+337,Benedita da Silva,PT,Rio de Janeiro
+338,Carlos Jordy,PSL,Rio de Janeiro
+339,Chico d Angelo,PDT,Rio de Janeiro
+340,Chiquinho Brazão,AVANTE,Rio de Janeiro
+341,Chris Tonietto,PSL,Rio de Janeiro
+342,Christino Aureo,PP,Rio de Janeiro
+343,Clarisse Garotinho,PROS,Rio de Janeiro
+344,Daniel Silveira,PSL,Rio de Janeiro
+345,Daniela do Waguinho,MDB,Rio de Janeiro
+346,Delegado Antônio Furtado,PSL,Rio de Janeiro
+347,Dr. Luizinho,PP,Rio de Janeiro
+348,Felício Laterça,PSL,Rio de Janeiro
+349,Flordelis,PSD,Rio de Janeiro
+350,Gelson Azevedo,PHS,Rio de Janeiro
+351,Glauber Braga,PSOL,Rio de Janeiro
+352,Gutemberg Reis,MDB,Rio de Janeiro
+353,Helio Fernando Barbosa Lopes,PSL,Rio de Janeiro
+354,Hugo Leal,PSD,Rio de Janeiro
+355,Jandira Feghali,PC do B,Rio de Janeiro
+356,David Miranda,PSOL,Rio de Janeiro
+357,Juninho do Pneu,DEM,Rio de Janeiro
+358,Lourival Gomes,PSL,Rio de Janeiro
+359,Luiz Antônio,DC,Rio de Janeiro
+360,Luiz Lima,PSL,Rio de Janeiro
+361,Major Fabiana,PSL,Rio de Janeiro
+362,Marcelo Calero,PPS,Rio de Janeiro
+363,Marcelo Freixo,PSOL,Rio de Janeiro
+364,Márcio Labre,PSL,Rio de Janeiro
+365,Otoni de Paula,PSC,Rio de Janeiro
+366,Paulo Ganime,NOVO,Rio de Janeiro
+367,Paulo Ramos,PDT,Rio de Janeiro
+368,Pedro Paulo,DEM,Rio de Janeiro
+369,Professor Joziel,PSL,Rio de Janeiro
+370,Rodrigo Maia,DEM,Rio de Janeiro
+371,Rosangela Gomes,PRB,Rio de Janeiro
+372,Sargento Gurgel,PSL,Rio de Janeiro
+373,Soraya Santos,PR,Rio de Janeiro
+374,Sóstenes,DEM,Rio de Janeiro
+375,Talíria Petrone,PSOL,Rio de Janeiro
+376,Vinícius Farah,MDB,Rio de Janeiro
+377,Jorge Braz,PRB,Rio de Janeiro
+378,Wladimir Garotinho,PRP,Rio de Janeiro
+380,Benes Leocadio,PTC,Rio Grande do Norte
+381,Fábio Faria,PSD,Rio Grande do Norte
+382,General Girao,PSL,Rio Grande do Norte
+383,João Maia,PR,Rio Grande do Norte
+384,Beto Rosado,PP,Rio Grande do Norte
+385,Natalia Bonavides,PT,Rio Grande do Norte
+386,Rafael Motta,PSB,Rio Grande do Norte
+387,Walter Alves,MDB,Rio Grande do Norte
+389,Afonso Hamm,PP,Rio Grande do Sul
+390,Afonso Motta,PDT,Rio Grande do Sul
+391,Alceu Moreira,MDB,Rio Grande do Sul
+392,Bibo Nunes,PSL,Rio Grande do Sul
+393,Bohn Gass,PT,Rio Grande do Sul
+394,Carlos Gomes,PRB,Rio Grande do Sul
+395,Covatti Filho,PP,Rio Grande do Sul
+396,Daniel da TV,PSDB,Rio Grande do Sul
+397,Danrlei de Deus Goleiro,PSD,Rio Grande do Sul
+398,Fernanda Melchionna,PSOL,Rio Grande do Sul
+399,Giovani Cherini,PR,Rio Grande do Sul
+400,Giovani Feltes,MDB,Rio Grande do Sul
+401,Heitor Schuch,PSB,Rio Grande do Sul
+402,Henrique Fontana,PT,Rio Grande do Sul
+403,Jerônimo Goergen,PP,Rio Grande do Sul
+404,Liziane Bayer,PSB,Rio Grande do Sul
+405,Lucas Redecker,PSDB,Rio Grande do Sul
+406,Marcel Van Hattem,NOVO,Rio Grande do Sul
+407,Marcelo Moraes,PTB,Rio Grande do Sul
+408,Márcio Biolchi,MDB,Rio Grande do Sul
+409,Marcon,PT,Rio Grande do Sul
+410,Maria do Rosário,PT,Rio Grande do Sul
+411,Marlon Santos,PDT,Rio Grande do Sul
+412,Maurício Dziedricki,PTB,Rio Grande do Sul
+413,Nereu Crispin,PSL,Rio Grande do Sul
+414,Onyx Lorenzoni,DEM,Rio Grande do Sul
+415,Osmar Terra,MDB,Rio Grande do Sul
+416,Paulo Pimenta,PT,Rio Grande do Sul
+417,Pedro Westphalen,PP,Rio Grande do Sul
+418,Pompeo de Mattos,PDT,Rio Grande do Sul
+419,Sanderson Federal,PSL,Rio Grande do Sul
+421,Coronel Chrisóstomo,PSL,Rondônia
+422,Dr. Mauro Nazif,PSB,Rondônia
+423,Expedito Netto,PSD,Rondônia
+424,Jaqueline Cassol,PP,Rondônia
+425,Léo Moraes,PODE,Rondônia
+426,Lucio Mosquini,MDB,Rondônia
+427,Mariana Carvalho,PSDB,Rondônia
+428,Silvia Cristina,PDT,Rondônia
+430,Dr. Hiran Gonçalves,PP,Roraima
+431,Edio Lopes,PR,Roraima
+432,Haroldo Cathedral,PSD,Roraima
+433,Jhonatan de Jesus,PRB,Roraima
+434,Joenia Wapichana,REDE,Roraima
+435,Nicoletti,PSL,Roraima
+436,Otaci,SD,Roraima
+437,Shéridan,PSDB,Roraima
+439,Angela Amin,PP,Santa Catarina
+440,Carlos Chiodini,MDB,Santa Catarina
+441,Carmen Zanotto,PPS,Santa Catarina
+442,Caroline de Toni,PSL,Santa Catarina
+443,Celso Maldaner,MDB,Santa Catarina
+444,Coronel Armando,PSL,Santa Catarina
+445,Daniel Freitas,PSL,Santa Catarina
+446,Darci de Matos,PSD,Santa Catarina
+447,Fabio Schiochet,PSL,Santa Catarina
+448,Geovania de Sá,PSDB,Santa Catarina
+449,Gilson Marques,NOVO,Santa Catarina
+450,Hélio Costa,PRB,Santa Catarina
+451,Peninha,MDB,Santa Catarina
+452,Professor Pedro Uczai,PT,Santa Catarina
+453,Ricardo Guidi,PSD,Santa Catarina
+454,Rodrigo Coelho,PSB,Santa Catarina
+456,Abou Anni,PSL,São Paulo
+457,Adriana Ventura,NOVO,São Paulo
+458,Alencar Santana,PT,São Paulo
+459,Alex Manente,PPS,São Paulo
+460,Alexandre Frota,PSL,São Paulo
+461,Alexandre Leite,DEM,São Paulo
+462,Alexandre Padilha,PT,São Paulo
+463,Alexis,NOVO,São Paulo
+464,Arlindo Chinaglia,PT,São Paulo
+465,Arnaldo Jardim,PPS,São Paulo
+466,Baleia Rossi,MDB,São Paulo
+467,Bruna Furlan,PSDB,São Paulo
+468,Capitão Augusto,PR,São Paulo
+469,Carla Zambelli,PSL,São Paulo
+470,Carlos Sampaio,PSDB,São Paulo
+471,Carlos Zarattini,PT,São Paulo
+472,Celso Russomano,PRB,São Paulo
+473,Cezinha de Madureira,PSD,São Paulo
+474,Coronel Tadeu,PSL,São Paulo
+475,David Soares,DEM,São Paulo
+476,Eduardo Bolsonaro,PSL,São Paulo
+477,Eduardo Cury,PSDB,São Paulo
+478,Eli Corrêa Filho,DEM,São Paulo
+479,Enrico Misasi,PV,São Paulo
+480,Fausto Pinato,PP,São Paulo
+481,General Peternelli,PSL,São Paulo
+482,Geninho Zuliani,DEM,São Paulo
+483,Gilberto Nascimento,PSC,São Paulo
+484,Guiga Peixoto,PSL,São Paulo
+485,Guilherme Mussi,PP,São Paulo
+486,Herculano Passos,MDB,São Paulo
+487,Ivan Valente,PSOL,São Paulo
+488,Jefferson Campos,PSB,São Paulo
+489,Joice Hasselmann,PSL,São Paulo
+490,Junior Bozzella,PSL,São Paulo
+491,Kim Kataguiri,DEM,São Paulo
+492,Luiz Carlos Motta,PR,São Paulo
+493,Luiz Philippe O. Bragança,PSL,São Paulo
+494,Luiza Erundina,PSOL,São Paulo
+495,Marcio Alvino,PR,São Paulo
+496,Marco Bertaiolli,PSD,São Paulo
+497,Marcos Pereira,PRB,São Paulo
+498,Maria Rosas,PRB,São Paulo
+499,Miguel Lombardi,PR,São Paulo
+500,Milton Vieira,PRB,São Paulo
+501,Nilto Tatto,PT,São Paulo
+502,Orlando Silva,PC do B,São Paulo
+503,Pastor Marco Feliciano,PODE,São Paulo
+504,Paulinho da Força,SD,São Paulo
+505,Paulo Freire Costa,PR,São Paulo
+506,Paulo Teixeira,PT,São Paulo
+507,Policial Katia Sastre,PR,São Paulo
+508,Professor Luiz Flavio Gomes,PSB,São Paulo
+509,Renata Abreu,PODE,São Paulo
+510,Ricardo Izar,PP,São Paulo
+511,Roberto Alves,PRB,São Paulo
+512,Roberto de Lucena,PODE,São Paulo
+513,Rodrigo Agostinho,PSB,São Paulo
+514,Rosana Valle,PSB,São Paulo
+515,Rui Falcão,PT,São Paulo
+516,Sâmia Bomfim,PSOL,São Paulo
+517,Samuel Moreira,PSDB,São Paulo
+518,Tabata Amaral,PDT,São Paulo
+519,Tenente Derrite,PP,São Paulo
+520,Tiririca,PR,São Paulo
+521,Vanderlei Macris,PSDB,São Paulo
+522,Vicentinho,PT,São Paulo
+523,Vinicius Carvalho,PRB,São Paulo
+524,Vinicius Poit,NOVO,São Paulo
+525,Vitor Lippi,PSDB,São Paulo
+527,Bosco Costa,PR,Sergipe
+528,Fábio Henrique,PDT,Sergipe
+529,Fábio Mitidieri,PSD,Sergipe
+530,Fabio Reis,MDB,Sergipe
+531,Gustinho Ribeiro,SD,Sergipe
+532,Joao Daniel,PT,Sergipe
+533,Laercio Oliveira,PP,Sergipe
+534,Valdevan Noventa,PSC,Sergipe
+536,Carlos Henrique Gaguim,DEM,Tocantins
+537,Celio Moura,PT,Tocantins
+538,Dulce Miranda,MDB,Tocantins
+539,Eli Borges,SD,Tocantins
+540,Osires Damaso,PSC,Tocantins
+541,Professora Dorinha,DEM,Tocantins
+542,Tiago Dimas,SD,Tocantins
+543,Vicentinho Junior,PR,Tocantins
