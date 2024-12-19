@@ -126,7 +126,8 @@ def plot_volatilities(Experimento):
 
     plt.figure(figsize=(10, 6))
     plt.scatter(range(len(Experimento.volatilities)), Experimento.volatilities, alpha=0.5)
-    plt.title('Volatilities Scatter Plot')
+    plt.suptitle('Volatilities Scatter Plot - ', fontsize = 20 )
+    plt.title('λ = %s, δ = %s'%(Experimento.l,Experimento.delta), fontsize = 16)
     plt.xlabel('Index')
     plt.ylabel('Volatility')
     plt.grid(True)
