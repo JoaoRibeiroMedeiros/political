@@ -119,3 +119,15 @@ def plot_party_evolution(Experimento, party = 'PT', save = False):
     plt.tight_layout()
     if save:
         plt.savefig(party+'_Opinions_Sets_Evolution_λ_'+str(Experimento.l)+'_δ_'+str(Experimento.delta)+'.png')
+
+
+
+def plot_volatilities(Experimento):
+
+    plt.figure(figsize=(10, 6))
+    plt.scatter(range(len(Experimento.volatilities)), Experimento.volatilities, alpha=0.5)
+    plt.title('Volatilities Scatter Plot')
+    plt.xlabel('Index')
+    plt.ylabel('Volatility')
+    plt.grid(True)
+    plt.show()

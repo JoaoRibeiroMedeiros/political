@@ -22,8 +22,6 @@ def binomial_coefficient(n, k):
     return math.comb(n, k)
 
 
-
-
 def days_from_td(delta):
     total_seconds = delta.total_seconds()
     days = total_seconds / (24 * 3600)  
@@ -68,6 +66,12 @@ class ModelStats:
 
         return ids
     
+    def get_politician_names(self):
+
+        ids = self.get_politicians()
+        names = [self.deputados[self.deputados['Id_politico']==_id]['NOME'].values[0] for _id in ids]
+        return names
+    
     def get_statements_num_and_sum(self, _id):
         print(_id, len(self.df[self.df['Id_politico']==_id]), sum(self.df[self.df['Id_politico']==_id]['isFavorable']))
     
@@ -80,7 +84,7 @@ class ModelStats:
         for _id in ids:
             statements = self.get_all_statements_per_politician(_id)
             volatility = np.std(statements)
-            from_politician_to_volatility[id] = volatility
+            from_politician_to_volatility[_id] = volatility
 
         self.from_politician_to_volatility = from_politician_to_volatility
 
@@ -90,8 +94,11 @@ class ModelStats:
         max_volatility_index = volatilities.index(max_volatility)
 
         id_politician_with_max_volatility = ids[max_volatility_index]
-
         max_volatility_politician = self.get_politician(id_politician_with_max_volatility)
+
+        self.statement_volatilities = volatilities
+        self.max_volatility = max_volatility
+        self.max_volatility_politician = max_volatility_politician
 
         return volatilities, max_volatility, max_volatility_politician
 
@@ -640,13 +647,15 @@ class ModelStats:
 
         return   A_trajectories, O_trajectories, all_trajectories, set_probability
 
-    def calculate_approval_probability_by_single_vote(self, n_politicians, needed_votes_for_approval, l, delta, delta_method =  'dynamic'):
+    def calculate_approval_probability_by_single_vote(self, needed_votes_for_approval, delta_method =  'dynamic'):
 
         set_probability_by_id = {}
 
+        n_politicians = len(self.id_politicos)
+
         for id_politico in self.id_politicos:
 
-            set_probability = self.calculate_single_vote_probability(self, id, l, delta, delta_method =  'dynamic')
+            set_probability = self.calculate_single_vote_probability(id_politico, delta_method )
             set_probability_by_id[id_politico] = set_probability
 
         for _i in range(needed_votes_for_approval,n_politicians):
