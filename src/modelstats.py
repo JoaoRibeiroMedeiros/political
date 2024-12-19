@@ -6,7 +6,7 @@ from tqdm import tqdm
 from src.crop import   (crop_statements_until_t,
                    crop_statements_from_t0_to_t, 
                    crop_statements_until_t_by_politician, 
-                   crop_all_statements)
+                   crop_all_statements,crop_all_statements_per_politician)
 
 from dataclasses import dataclass
 from typing import List
@@ -55,16 +55,46 @@ class ModelStats:
 
         return self.df.head()
     
+    def get_politician(self, _id):
+        return self.deputados[self.deputados['Id_politico'] == _id]
+    
+    def get_all_statements_per_politician(self, _id):
+        return crop_all_statements_per_politician(self.df, _id)
+    
     def get_politicians(self):
 
          # id_politicos = [id_politico for statements, id_politico in crop_statements_until_t(self.df, self.times.iloc[-1])]  ?
         ids = list(self.df['Id_politico'].unique())
 
-        # for _id in ids:
-        #     print(_id)
-
         return ids
     
+    def get_statements_num_and_sum(self, _id):
+        print(_id, len(self.df[self.df['Id_politico']==_id]), sum(self.df[self.df['Id_politico']==_id]['isFavorable']))
+    
+    def get_statement_volatility(self):
+
+        ids = self.get_politicians()
+
+        from_politician_to_volatility = {}
+
+        for _id in ids:
+            statements = self.get_all_statements_per_politician(_id)
+            volatility = np.std(statements)
+            from_politician_to_volatility[id] = volatility
+
+        self.from_politician_to_volatility = from_politician_to_volatility
+
+        volatilities = list(from_politician_to_volatility.values())
+
+        max_volatility = max(volatilities)
+        max_volatility_index = volatilities.index(max_volatility)
+
+        id_politician_with_max_volatility = ids[max_volatility_index]
+
+        max_volatility_politician = self.get_politician(id_politician_with_max_volatility)
+
+        return volatilities, max_volatility, max_volatility_politician
+
     def get_rates(self, lag):
 
         ids = self.get_politicians()
@@ -485,18 +515,19 @@ class ModelStats:
 
         return sectioned_list
     
-    def get_all_t0_t_whose_difference_is_lagsize(self, d , little_lag = 12*3600 ):
+    def get_all_t0_t_whose_difference_is_lagsize(self, d , slide_lag = 24*3600 ):
         """
         Where m is posts per d based on politician rate
         """
     
         t0_t_pairs = []
+
         i = 0
 
         while self.times.iloc[0] + timedelta(seconds = i) < self.times.iloc[-1]:
 
             t0_t_pairs.append((self.times[0] + timedelta(seconds = i), self.times[0] + timedelta(seconds = i) + timedelta(seconds = 24*3600*d)))
-            i += little_lag
+            i += slide_lag
 
         return t0_t_pairs
 
@@ -564,6 +595,19 @@ class ModelStats:
     
         return   (approval_trajectories/all_trajectories)
     
+
+    def test_calculate_single_vote_probability(self, id_politico,  delta_method =  'dynamic'):
+
+        self = self.get_post_trajectories_size_d_lags( self.lags_to_reckoning)
+
+        list_probable_statements_after_t = self.from_politician_to_d_chopped_series[id_politico]
+
+        list_probable_statements_after_t = list(list_probable_statements_after_t)      
+
+        all_politician_i_statements = crop_all_statements_per_politician(self.df, id_politico)
+        
+        return list_probable_statements_after_t, all_politician_i_statements
+
     def calculate_single_vote_probability(self, id_politico,  delta_method =  'dynamic'):
 
         self = self.get_post_trajectories_size_d_lags( self.lags_to_reckoning)
@@ -572,8 +616,8 @@ class ModelStats:
 
         list_probable_statements_after_t = list(list_probable_statements_after_t)      
 
-        all_politician_i_statements = crop_statements_until_t_by_politician(self.df, self.times.iloc[-1]+ timedelta(days = 1), id_politico)
-        
+        all_politician_i_statements = crop_all_statements_per_politician(self.df, id_politico)
+
         all_trajectories = 0
         A_trajectories = 0
         O_trajectories = 0
@@ -594,7 +638,7 @@ class ModelStats:
 
         set_probability = {'A': A_trajectories/all_trajectories, 'O': O_trajectories/all_trajectories }
 
-        return   set_probability
+        return   A_trajectories, O_trajectories, all_trajectories, set_probability
 
     def calculate_approval_probability_by_single_vote(self, n_politicians, needed_votes_for_approval, l, delta, delta_method =  'dynamic'):
 

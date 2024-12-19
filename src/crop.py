@@ -24,6 +24,12 @@ def crop_all_statements(df):
     
     return tau
 
+def crop_all_statements_per_politician(df, id_politico ):
+
+    taui = df.isFavorable[df.Id_politico == id_politico]
+    
+    return taui.tolist()
+
 def crop_statements_from_t0_to_t(df, t0, t):
 
     _df = df[df.time>t0]
@@ -33,7 +39,7 @@ def crop_statements_from_t0_to_t(df, t0, t):
     
     for i in idspoliticos:
 
-        taui = df.isFavorable[df.Id_politico == i]
+        taui = _df.isFavorable[_df.Id_politico == i]
         tau.append([taui.tolist(), i])    #inclui iD politico
     
     return tau
