@@ -653,12 +653,17 @@ class ModelStats:
 
         n_politicians = len(self.id_politicos)
 
-        for id_politico in self.id_politicos:
+    
+        for id_politico in tqdm(self.id_politicos):
+
+            print('calculating prob for politican ' + id_politico)
 
             set_probability = self.calculate_single_vote_probability(id_politico, delta_method )
             set_probability_by_id[id_politico] = set_probability
 
-        for _i in range(needed_votes_for_approval,n_politicians):
+        for _i in tqdm(range(needed_votes_for_approval,n_politicians)):
+
+            print('calculating prob for politican ' + id_politico)
 
             prob = binomial_coefficient(n_politicians, _i)* set_probability_by_id[id_politico]['A'] * set_probability_by_id[id_politico]['O']
     

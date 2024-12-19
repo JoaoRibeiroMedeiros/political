@@ -125,10 +125,10 @@ def plot_party_evolution(Experimento, party = 'PT', save = False):
 def plot_volatilities(Experimento):
 
     plt.figure(figsize=(10, 6))
-    plt.scatter(range(len(Experimento.volatilities)), Experimento.volatilities, alpha=0.5)
-    plt.suptitle('Volatilities Scatter Plot - ', fontsize = 20 )
+    plt.scatter(range(len(Experimento.statement_volatilities)), Experimento.statement_volatilities, alpha=0.5)
+    plt.suptitle('Statement Volatilities Scatter Plot ', fontsize = 20 )
     plt.title('λ = %s, δ = %s'%(Experimento.l,Experimento.delta), fontsize = 16)
     plt.xlabel('Index')
-    plt.ylabel('Volatility')
+    plt.ylabel('Statement Volatility')
     plt.grid(True)
     plt.show()
