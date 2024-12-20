@@ -145,3 +145,27 @@ def plot_volatilities(prob_analysis):
     plt.legend(handles=legend_elements, title='Volatility Levels')
 
     plt.show()
+
+
+
+def plot_prob_evolution(from_time_cut_to_probability, date_of_reckoning, name, ):
+
+    # date_of_reckoning
+    # Extract dates and probabilities for plotting
+    dates = list(from_time_cut_to_probability.keys())
+    A_probabilities = [from_time_cut_to_probability[date]['A'] for date in dates]
+    O_probabilities = [from_time_cut_to_probability[date]['O'] for date in dates]
+
+    # Plot the time series
+    plt.figure(figsize=(12, 6))
+    plt.plot(dates, A_probabilities, label='A Probability', marker='o')
+    plt.plot(dates, O_probabilities, label='O Probability', marker='o')
+    plt.axvline(x=date_of_reckoning, color='r', linestyle='--', label='Date of Reckoning')
+    plt.xlabel('Date')
+    plt.ylabel('Probability')
+    plt.title(name + ' - Time Series of A and O Probabilities')
+    plt.legend()
+    plt.grid(True)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
