@@ -2,6 +2,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.lines import Line2D
 
 def plot_fluxes(Experimento, save = False):
 
@@ -121,14 +122,26 @@ def plot_party_evolution(Experimento, party = 'PT', save = False):
         plt.savefig(party+'_Opinions_Sets_Evolution_λ_'+str(Experimento.l)+'_δ_'+str(Experimento.delta)+'.png')
 
 
+def plot_volatilities(prob_analysis):
+    plt.figure(figsize=(19, 6))
 
-def plot_volatilities(Experimento):
+    threshold1 = 0.5
+    threshold2 = 0.7
 
-    plt.figure(figsize=(10, 6))
-    plt.scatter(range(len(Experimento.statement_volatilities)), Experimento.statement_volatilities, alpha=0.5)
+    colors = ['gray' if v < threshold1 else 'orange' if v < threshold2 else 'red' for v in prob_analysis.statement_volatilities]
+
+    plt.scatter(range(len(prob_analysis.statement_volatilities)), prob_analysis.statement_volatilities, c=colors, alpha=0.5)
+
     plt.suptitle('Statement Volatilities Scatter Plot ', fontsize = 20 )
-    plt.title('λ = %s, δ = %s'%(Experimento.l,Experimento.delta), fontsize = 16)
-    plt.xlabel('Index')
+    plt.title('λ = %s, δ = %s'%(prob_analysis.l,prob_analysis.delta), fontsize = 16)
+    plt.xlabel('Politician Id')
     plt.ylabel('Statement Volatility')
     plt.grid(True)
+
+    # Create simple legend
+    legend_elements = [Line2D([0], [0], marker='o', color='w', label='Low', markersize=10, markerfacecolor='gray', alpha=0.5),
+                       Line2D([0], [0], marker='o', color='w', label='Medium', markersize=10, markerfacecolor='orange', alpha=0.5),
+                       Line2D([0], [0], marker='o', color='w', label='High', markersize=10, markerfacecolor='red', alpha=0.5)]
+    plt.legend(handles=legend_elements, title='Volatility Levels')
+
     plt.show()

@@ -62,7 +62,7 @@ class ModelStats:
     def get_politicians(self):
 
          # id_politicos = [id_politico for statements, id_politico in crop_statements_until_t(self.df, self.times.iloc[-1])]  ?
-        ids = list(self.df['Id_politico'].unique())
+        ids = list(int(i) for i in self.df['Id_politico'].unique())
 
         return ids
     
@@ -70,14 +70,16 @@ class ModelStats:
 
         ids = self.get_politicians()
         names = [self.deputados[self.deputados['Id_politico']==_id]['NOME'].values[0] for _id in ids]
+
         return names
     
     def get_statements_num_and_sum(self, _id):
+
         print(_id, len(self.df[self.df['Id_politico']==_id]), sum(self.df[self.df['Id_politico']==_id]['isFavorable']))
     
     def get_statement_volatility(self):
 
-        ids = self.get_politicians()
+        ids =  self.get_politicians()
 
         from_politician_to_volatility = {}
 
@@ -100,19 +102,19 @@ class ModelStats:
         self.max_volatility = max_volatility
         self.max_volatility_politician = max_volatility_politician
 
-        return volatilities, max_volatility, max_volatility_politician
+        return self
 
     def get_rates(self, lag):
 
         ids = self.get_politicians()
 
         from_id_to_df = {id : self.df[self.df['Id_politico'] == id] for id in ids}
-        from_id_to_rate = {id: 1 / (lags_from_td(np.mean(from_id_to_df[id].time.diff()), lag)) for id in ids}
-        from_id_to_rate = {id: 0 if np.isnan(from_id_to_rate[id]) else from_id_to_rate[id] for id in ids}
+        from_id_to_rate = {id : 1 / (lags_from_td(np.mean(from_id_to_df[id].time.diff()), lag)) for id in ids}
+        from_id_to_rate = {id : 0 if np.isnan(from_id_to_rate[id]) else from_id_to_rate[id] for id in ids}
 
         return from_id_to_rate
     
-    def get_window_size_fror_probability_estimation(self, days_to_reckoning):
+    def get_expected_number_of_posts_until_reckoning(self, days_to_reckoning):
 
         ids = self.get_politicians()
         from_id_to_rate = self.get_rates()
@@ -124,9 +126,12 @@ class ModelStats:
 
         current_datetime = start_datetime
         count = 0
+
         while current_datetime < end_datetime:
+
             current_datetime += lagsize
             count += 1
+
         return count
     
     def get_timeframes(self, lag, day_of_reckoning):
@@ -558,11 +563,12 @@ class ModelStats:
         t0_t_pairs = self.get_all_t0_t_whose_difference_is_lagsize(d)
 
         print('running sliding window')
-
+        
         for (t0, t) in tqdm(t0_t_pairs):
             for elem in crop_statements_from_t0_to_t(self.df,t0,t):
+
                 statements, id_politico = elem
-                from_politician_to_d_chopped_series[id_politico].append(statements)
+                from_politician_to_d_chopped_series[int(id_politico)].append(statements)
 
         self.from_politician_to_d_chopped_series = from_politician_to_d_chopped_series
 
