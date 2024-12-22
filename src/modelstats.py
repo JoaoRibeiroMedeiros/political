@@ -159,9 +159,9 @@ class ModelStats:
                 statements, id_politico = elem
 
                 if delta_method ==  'dynamic':
-                    P = Model(statements).runlite_dynamic(l, delta, self.lags_to_reckoning - n, self.lags_to_reckoning)
+                    P = Model(statements,l, delta).runlite_dynamic( self.lags_to_reckoning - n, self.lags_to_reckoning)
                 if delta_method ==  'static':
-                    P = Model(statements).runlite(l, delta)
+                    P = Model(statements,l, delta).runlite()
 
                 politician_opinion = PoliticianOpinion(id_politico, P)
                 from_politician_to_opinion_history[id_politico].append(P)
