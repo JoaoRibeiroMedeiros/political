@@ -16,7 +16,7 @@ from itertools import product
 from src.models import SimulateStatement, Model, PoliticianOpinion, PoliticiansOpinionInTime
 
 
-class ProbabilityEstimation: 
+class ProbabilityAnalysis: 
 
     def __init__(self, path, deputados_path, simulate = False, simulate_time = None):
 
@@ -91,6 +91,22 @@ class ProbabilityEstimation:
         self.times = times
 
         return self
+    
+    def get_high_statement_volatility_politicians(self):
+        high_volatility_ids = [int(i ) for i, v in self.from_politician_to_volatility.items() if 0.5 < v < 1]
+        return high_volatility_ids
+
+    def get_high_statement_volatility_info(self):
+
+        high_volatility_ids = self.get_high_statement_volatility_politicians()
+
+        high_volatility_politican_info = [self.get_politician(i) for i in high_volatility_ids]
+
+        from_name_to_id_high_vol = {info['NOME'].values[0]: int(info['Id_politico'].values[0]) for info in high_volatility_politican_info}
+        from_id_to_name_high_vol = {v: k for k, v in from_name_to_id_high_vol.items()}
+
+        return  from_id_to_name_high_vol, from_name_to_id_high_vol, high_volatility_politican_info
+
 
     def get_statement_volatility(self):
 

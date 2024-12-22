@@ -148,24 +148,39 @@ def plot_volatilities(prob_analysis):
 
 
 
-def plot_prob_evolution(from_time_cut_to_probability, date_of_reckoning, name, ):
+def plot_prob_evolution(from_time_cut_to_probability, date_of_reckoning, name):
 
     # date_of_reckoning
     # Extract dates and probabilities for plotting
     dates = list(from_time_cut_to_probability.keys())
     A_probabilities = [from_time_cut_to_probability[date]['A'] for date in dates]
     O_probabilities = [from_time_cut_to_probability[date]['O'] for date in dates]
-
     # Plot the time series
     plt.figure(figsize=(12, 6))
-    plt.plot(dates, A_probabilities, label='A Probability', marker='o')
-    plt.plot(dates, O_probabilities, label='O Probability', marker='o')
+
+    # Plot A probabilities with a darker green color
+    plt.plot(dates, A_probabilities, label='A Probability', marker='o', color='#228B22')  # ForestGreen
+
+    # Plot O probabilities with a darker red color
+    plt.plot(dates, O_probabilities, label='O Probability', marker='o', color='#8B0000')  # DarkRed
+
+    # Add the vertical line for the date of reckoning
     plt.axvline(x=date_of_reckoning, color='r', linestyle='--', label='Date of Reckoning')
+
+    # Set labels and title
     plt.xlabel('Date')
     plt.ylabel('Probability')
     plt.title(name + ' - Time Series of A and O Probabilities')
+
+    # Add legend and grid
     plt.legend()
     plt.grid(True)
+
+    # Rotate x-axis labels if necessary
     plt.xticks(rotation=45)
+
+    # Adjust layout to fit elements
     plt.tight_layout()
+
+    # Show the plot
     plt.show()

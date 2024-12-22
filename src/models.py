@@ -84,9 +84,11 @@ class SimulateStatement:
  
 class Model: 
     
-    def __init__(self, tau):
+    def __init__(self, tau, lambd, delta):
         self.N = len(tau)
         self.tau = tau
+        self.l = lambd
+        self.delta= delta
 
     def lastOr0(obj):
 
@@ -95,7 +97,7 @@ class Model:
         else:
             return obj[-1]
 
-    def h_exp(self,l):
+    def h_exp(self):
 
         h = np.zeros(self.N)
 
@@ -103,19 +105,19 @@ class Model:
 
         for i in range(1,self.N):
 
-            h[i] = l * h[i-1] + (1-l) * self.tau[i]
+            h[i] = self.l * h[i-1] + (1-self.l) * self.tau[i]
 
         return h
 
     # End result Score
 
-    def h_exp_escalar(self, l):
+    def h_exp_escalar(self):
 
         h =  self.tau[0]
 
         for i in range(1,self.N):
 
-            h = l * h + (1-l) * self.tau[i]
+            h = self.l * h + (1-self.l) * self.tau[i]
 
         return h
 
@@ -125,96 +127,96 @@ class Model:
         return [np.mean(self.tau[:i]) for i in range(len(self.tau))]
 
 
-    def classifier(self, scores, delta):
+    def classifier(self, scores):
         h=[]
         for i in range(len(scores)):
             obj = scores[i]
-            if obj<-delta:
+            if obj<-self.delta:
                 h.append(-1)
-            if obj>delta:
+            if obj>self.delta:
                 h.append(1)
-            if obj<delta and obj>-delta:
+            if obj<self.delta and obj>-self.delta:
                 h.append(0)
 
         return h
     
-    def dynamic_classifier(self, scores, delta_0, distance_from_reckoning, time_of_reckoning):
+    def dynamic_classifier(self, scores, distance_from_reckoning, time_of_reckoning):
         
         h=[]
 
-        delta = (distance_from_reckoning/time_of_reckoning)*delta_0
+        delta = (distance_from_reckoning/time_of_reckoning)*self.delta
 
         for i in range(len(scores)):
             obj = scores[i]
-            if obj<-delta:
+            if obj<-self.delta:
                 h.append(-1)
-            if obj>delta:
+            if obj>self.delta:
                 h.append(1)
-            if obj<delta and obj>-delta:
+            if obj<self.delta and obj>-self.delta:
                 h.append(0)
 
         return h
 
-    def run(self, l , delta, method='exp'): # t é n de enesimo tweet
+    def run(self, method='exp'): # t é n de enesimo tweet
 
         if method=='exp':
 
             function = self.h_exp
-            scores = function(l)
+            scores = function(self.l)
 
         if method=='mean':
             function = self.h_mean
             scores = function()
 
-        return self.classifier(scores,delta)
+        return self.classifier(scores)
 
-    def classifierlite(self,score,delta):
+    def classifierlite(self,score):
 
-        if score<-delta: return -1
-        if score>delta: return 1
-        if score<delta and score>-delta: return 0
+        if score<-self.delta: return -1
+        if score>self.delta: return 1
+        if score<self.delta and score>-self.delta: return 0
 
-    def classifierlite_dynamic(self, score, delta_0, distance_from_reckoning, day_of_reckoning):
+    def classifierlite_dynamic(self, score, distance_from_reckoning, day_of_reckoning):
 
-        delta = (distance_from_reckoning/day_of_reckoning)*delta_0
+        delta = (distance_from_reckoning/day_of_reckoning)*self.delta
 
         if score<=-delta: return -1
         if score>delta: return 1
         if score<delta and score>-delta: return 0
  
 
-    def runlite(self, l , delta, method='exp'): # t é n de enesimo tweet
+    def runlite(self,  method='exp'): # t é n de enesimo tweet
 
         if method=='exp':
             function = self.h_exp_escalar
-            scores = function(l)
+            scores = function()
 
         if method=='mean':
             function = self.h_mean
             scores = function()
 
-        return self.classifierlite(scores,delta)
+        return self.classifierlite(scores,self.delta)
     
-    def runlite_dynamic(self, l , delta, distance_from_reckoning, time_of_reckoning, method='exp'): # t é n de enesimo tweet
+    def runlite_dynamic(self, distance_from_reckoning, time_of_reckoning, method='exp'): # t é n de enesimo tweet
 
         if method=='exp':
             function = self.h_exp_escalar
-            scores = function(l)
+            scores = function()
 
         if method=='mean':
             function = self.h_mean
             scores = function()
 
-        return self.classifierlite_dynamic(scores, delta, distance_from_reckoning, time_of_reckoning)
+        return self.classifierlite_dynamic(scores, distance_from_reckoning, time_of_reckoning)
     
-    def runfull(self, l , delta, method='exp'): # t é n de enesimo tweet
+    def runfull(self, method='exp'): # t é n de enesimo tweet
 
         if method=='exp':
             function = self.h_exp_escalar
-            scores = function(l)
+            scores = function()
 
         if method=='mean':
             function = self.h_mean
             scores = function()
 
-        return self.classifierlite(scores,delta)
+        return self.classifierlite(scores)
