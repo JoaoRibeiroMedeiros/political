@@ -4,14 +4,14 @@ import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
 
-def plot_fluxes(Experimento, save = False):
+def plot_fluxes(opinion_analysis, save = False):
 
     fig, axs = plt.subplots(3, figsize = (10,5))
 
     # AXES: A -> K ; K -> O ; A -> O;
-    PhiAK = np.transpose(Experimento.fluxes)[0]
-    PhiKO = np.transpose(Experimento.fluxes)[1]
-    PhiAO = np.transpose(Experimento.fluxes)[2]
+    PhiAK = np.transpose(opinion_analysis.fluxes)[0]
+    PhiKO = np.transpose(opinion_analysis.fluxes)[1]
+    PhiAO = np.transpose(opinion_analysis.fluxes)[2]
 
     fluxmax = np.max(np.concatenate([PhiAK,PhiKO,PhiAO]))
     fluxmin =np.min(np.concatenate([PhiAK,PhiKO,PhiAO]))
@@ -33,22 +33,22 @@ def plot_fluxes(Experimento, save = False):
     fig.tight_layout()
 
     if save:
-        plt.savefig('Fluxes_λ_'+str(Experimento.l)+'_δ_'+str(Experimento.delta)+'.png')
+        plt.savefig('Fluxes_λ_'+str(opinion_analysis.l)+'_δ_'+str(opinion_analysis.delta)+'.png')
 
 
-def plot_vote_sets_evolution(Experimento, save = False):
+def plot_vote_sets_evolution(opinion_analysis, save = False):
 
     plt.figure(figsize=(10,7))
 
     plt.suptitle('Opinions Sets Evolution', fontsize = 20)
 
-    plt.title('λ = %s, δ = %s'%(Experimento.l,Experimento.delta), fontsize = 16)
+    plt.title('λ = %s, δ = %s'%(opinion_analysis.l,opinion_analysis.delta), fontsize = 16)
    
-    plt.plot(Experimento.times, Experimento.A, label = 'number of congressmen in Λ', color = 'green')
+    plt.plot(opinion_analysis.times, opinion_analysis.A, label = 'number of congressmen in Λ', color = 'green')
 
-    plt.plot(Experimento.times, Experimento.O, label = 'number of congressmen in Ω', color = 'red')
+    plt.plot(opinion_analysis.times, opinion_analysis.O, label = 'number of congressmen in Ω', color = 'red')
 
-    plt.plot(Experimento.times,Experimento.K, label = 'number of congressmen in K', color = 'gray')
+    plt.plot(opinion_analysis.times,opinion_analysis.K, label = 'number of congressmen in K', color = 'gray')
 
     plt.xlabel('Time', fontsize = 14)
 
@@ -60,7 +60,7 @@ def plot_vote_sets_evolution(Experimento, save = False):
     
 
     if save:
-        plt.savefig('Opinions_Sets_Evolution_λ_'+str(Experimento.l)+'_δ_'+str(Experimento.delta)+'.png')
+        plt.savefig('Opinions_Sets_Evolution_λ_'+str(opinion_analysis.l)+'_δ_'+str(opinion_analysis.delta)+'.png')
 
 
 
@@ -100,11 +100,11 @@ def create_animation(Plista, ordered = True):
             plt.savefig('partisanloc' + str(i)+'.png')
 
 
-def plot_party_evolution(Experimento, party = 'PT', save = False):
+def plot_party_evolution(opinion_analysis, party = 'PT', save = False):
 
-    serie_A, serie_K, serie_O = Experimento.serie_temporal_partido(party)
+    serie_A, serie_K, serie_O = opinion_analysis.serie_temporal_partido(party)
 
-    df_party = pd.concat([pd.DataFrame(x) for x in [Experimento.times, serie_A, serie_K, serie_O]],axis=1)
+    df_party = pd.concat([pd.DataFrame(x) for x in [opinion_analysis.times, serie_A, serie_K, serie_O]],axis=1)
 
     df_party.columns = ['time','Λ','K','Ω']
     df_party = df_party.set_index('time',drop=True)
@@ -119,7 +119,7 @@ def plot_party_evolution(Experimento, party = 'PT', save = False):
     
     plt.tight_layout()
     if save:
-        plt.savefig(party+'_Opinions_Sets_Evolution_λ_'+str(Experimento.l)+'_δ_'+str(Experimento.delta)+'.png')
+        plt.savefig(party+'_Opinions_Sets_Evolution_λ_'+str(opinion_analysis.l)+'_δ_'+str(opinion_analysis.delta)+'.png')
 
 
 def plot_volatilities(prob_analysis):
