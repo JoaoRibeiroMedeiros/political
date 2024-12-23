@@ -1,18 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[ ]:
-
+# %%
 
 import pandas as pd
 
 deputados = pd.read_csv('Deputados2018.csv')
-
 deputados['twitter'] = range(513)
 
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+
+
 
 def ScrapaDeputados2018(deputados,username, senha):
     

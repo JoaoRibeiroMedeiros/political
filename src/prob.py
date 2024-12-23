@@ -70,17 +70,21 @@ class ProbabilityAnalysis:
     
     def get_timeframes(self, lag, day_of_reckoning):
 
+        self.day_of_reckoning = day_of_reckoning
+
         # current timeframe size
         total_distance =  (self.df.time.iloc[-1] - self.df.time.iloc[0]).total_seconds() 
 
         # timeframe size to reckoning
-        total_distance_to_reckoning = (day_of_reckoning - self.df.time.iloc[0]).total_seconds() 
+        total_distance_to_reckoning_in_seconds = (day_of_reckoning - self.df.time.iloc[0]).total_seconds() 
+
+        self.total_distance_to_reckoning = total_distance_to_reckoning_in_seconds
 
         # number of lag time intervals inside of current timeframe
         nlags =  round(total_distance/timedelta(days=lag).total_seconds())
 
         # number of lag time intervals inside of current timeframe
-        lags_to_reckoning = round(total_distance_to_reckoning/timedelta(days=lag).total_seconds()) # unit is lags
+        lags_to_reckoning = round(total_distance_to_reckoning_in_seconds/timedelta(days=lag).total_seconds()) # unit is lags
 
         self.nlags = nlags
 
@@ -183,6 +187,7 @@ class ProbabilityAnalysis:
         return self
 
     def dynamic_programming(p_list, n):
+
         N = len(p_list)
         dp = [0] * (N + 1)
         dp[0] = 1
@@ -193,14 +198,58 @@ class ProbabilityAnalysis:
         
         return sum(dp[n:])
     
+    def get_politician_probability_evolution(self, l, delta, id_politico,  delta_method =  'dynamic'):
+
+        self.l = l
+        self.delta = delta
+
+        self = self.get_post_trajectories_size_d_lags( self.lags_to_reckoning)
+
+        list_probable_statements_after_t = self.from_politician_to_d_chopped_series[id_politico]
+        list_probable_statements_after_t = list(list_probable_statements_after_t)      
+
+        all_politician_i_statements = crop_all_statements_per_politician(self.df, id_politico)
+
+        from_time_cut_to_probability={}
+
+        for n, time_ in tqdm(enumerate(self.times)):
+
+            all_trajectories = 0
+            A_trajectories = 0
+            O_trajectories = 0
+
+            for statements_in_d in  list_probable_statements_after_t:
+
+                total_statements = all_politician_i_statements + statements_in_d
+        
+                if delta_method ==  'dynamic':
+                    P = Model(total_statements,self.l, self.delta).runlite_dynamic( self.lags_to_reckoning - n, self.lags_to_reckoning)
+                if delta_method ==  'static':
+                    P = Model(total_statements,self.l, self.delta).runlite()
+
+                if P == 1 : A_trajectories += 1
+                if P == -1 : O_trajectories += 1
+
+                all_trajectories += 1
+
+            set_probability = {'A': A_trajectories/all_trajectories, 'O': O_trajectories/all_trajectories }
+
+            from_time_cut_to_probability[time_] = set_probability
+
+        return   from_time_cut_to_probability, A_trajectories, O_trajectories, all_trajectories, set_probability
+    
+    
     def calculate_approval_probability(self,  l, delta, delta_method =  'dynamic'):
 
         ids = self.get_politicians()
         self = self.get_post_trajectories_size_d_lags(self.lags_to_reckoning)
+
         all_trajectories = 0
         approval_trajectories = 0
+
         list_probable_statements_after_t = list(self.from_politician_to_d_chopped_series.values())
-        list_probable_statements_after_t = list(product(*list_probable_statements_after_t))      
+        list_probable_statements_after_t = list(product(*list_probable_statements_after_t))  
+
         all_politician_statements = crop_all_statements(self.df)
 
         for statements_in_d in  tqdm(list_probable_statements_after_t):
@@ -211,9 +260,9 @@ class ProbabilityAnalysis:
             for id_politico, statements in zip(ids, total_statements):
 
                 if delta_method ==  'dynamic':
-                    P = Model(statements).runlite_dynamic(l, delta, 0, self.lags_to_reckoning)
+                    P = Model(statements, l, delta).runlite_dynamic(self.lags_to_reckoning)
                 if delta_method ==  'static':
-                    P = Model(statements).runlite(l, delta)
+                    P = Model(statements, l, delta).runlite()
 
                 politician_opinion = PoliticianOpinion(id_politico, P)
                 politician_opinion_list.append(politician_opinion)
@@ -240,37 +289,7 @@ class ProbabilityAnalysis:
         
         return list_probable_statements_after_t, all_politician_i_statements
 
-    def calculate_single_vote_probability(self, id_politico,  delta_method =  'dynamic'):
 
-        self = self.get_post_trajectories_size_d_lags( self.lags_to_reckoning)
-
-        list_probable_statements_after_t = self.from_politician_to_d_chopped_series[id_politico]
-
-        list_probable_statements_after_t = list(list_probable_statements_after_t)      
-
-        all_politician_i_statements = crop_all_statements_per_politician(self.df, id_politico)
-
-        all_trajectories = 0
-        A_trajectories = 0
-        O_trajectories = 0
-
-        for statements_in_d in  list_probable_statements_after_t:
-
-            total_statements = all_politician_i_statements + statements_in_d
-    
-            if delta_method ==  'dynamic':
-                P = Model(total_statements).runlite_dynamic(self.l, self.delta, 0, self.lags_to_reckoning)
-            if delta_method ==  'static':
-                P = Model(total_statements).runlite(self.l, self.delta)
-
-            if P == 1 : A_trajectories += 1
-            if P == -1 : O_trajectories += 1
-
-            all_trajectories += 1
-
-        set_probability = {'A': A_trajectories/all_trajectories, 'O': O_trajectories/all_trajectories }
-
-        return   A_trajectories, O_trajectories, all_trajectories, set_probability
 
     def calculate_approval_probability_by_single_vote(self, needed_votes_for_approval, delta_method =  'dynamic'):
 
