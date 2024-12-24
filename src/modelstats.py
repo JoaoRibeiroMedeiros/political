@@ -166,7 +166,7 @@ class ModelStats:
                 politician_opinion = PoliticianOpinion(id_politico, P)
                 from_politician_to_opinion_history[id_politico].append(P)
                 politician_opinion_list.append(politician_opinion)
-                statements, id_politico = elem
+                # statements, id_politico = elem
 
             politicians_opinion_in_time = PoliticiansOpinionInTime(politician_opinion_list, time_)
             from_time_to_politician_opinion_list[time_] = politicians_opinion_in_time
@@ -180,7 +180,7 @@ class ModelStats:
     def get_probable_vote_at_reckoning(self, statements, id_politico, l, delta,  score = 'exp', delta_method = 'dynamic'):
 
         if delta_method ==  'dynamic':
-            P = Model(statements).runlite_dynamic(l, delta, 0, self.lags_to_reckoning)
+            P = Model(statements).runlite_dynamic(l, delta, 0, self.total_distance_from_reckoning)
         if delta_method ==  'static':
             P = Model(statements).runlite(l, delta)
 
@@ -454,7 +454,9 @@ class ModelStats:
         totalpartyopinion = {}
 
         for party in np.unique(self.deputados.Partido):
+
             #totalpartyopinion[party] = {1: 0, 0: + self.deputados.Partido.value_counts()[party], -1: 0}
+
             totalpartyopinion[party] = {1: 0, 0: 0, -1: 0}
 
         for party in partytoopinions.keys():

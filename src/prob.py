@@ -31,9 +31,20 @@ class ProbabilityAnalysis:
 
             self.N = len(set(self.df.Id_politico))
             self.deputados = pd.read_csv(deputados_path)
+
+    def set_lag_and_reckoning(self, lag, day_of_reckoning):
+
+        self.total_time_in_df = (max(self.df['time']) - min(self.df['time'])).total_seconds
+        self.lag = lag 
+        self.lag_in_seconds = timedelta(days=self.lag).total_seconds()
+        self.day_of_reckoning = day_of_reckoning
+        total_distance_to_reckoning_in_seconds = (self.day_of_reckoning - self.df.time.iloc[0]).total_seconds() 
+        self.total_distance_to_reckoning_in_seconds = total_distance_to_reckoning_in_seconds
+        lags_to_reckoning = round(self.total_distance_to_reckoning_in_seconds/self.lag_in_seconds) # unit is lags
+        self.lags_to_reckoning = lags_to_reckoning
+        
             
     def head(self):
-
         return self.df.head()
     
     def get_politician(self, _id):
@@ -70,28 +81,21 @@ class ProbabilityAnalysis:
     
     def get_timeframes(self, lag, day_of_reckoning):
 
+        self.total_time_in_df = (max(self.df['time']) - min(self.df['time'])).total_seconds()
+        self.lag = lag 
+        self.lag_in_seconds = timedelta(days=self.lag).total_seconds()
         self.day_of_reckoning = day_of_reckoning
-
-        # current timeframe size
-        total_distance =  (self.df.time.iloc[-1] - self.df.time.iloc[0]).total_seconds() 
-
-        # timeframe size to reckoning
-        total_distance_to_reckoning_in_seconds = (day_of_reckoning - self.df.time.iloc[0]).total_seconds() 
-
-        self.total_distance_to_reckoning = total_distance_to_reckoning_in_seconds
-
-        # number of lag time intervals inside of current timeframe
-        nlags =  round(total_distance/timedelta(days=lag).total_seconds())
-
-        # number of lag time intervals inside of current timeframe
-        lags_to_reckoning = round(total_distance_to_reckoning_in_seconds/timedelta(days=lag).total_seconds()) # unit is lags
-
-        self.nlags = nlags
-
+        total_distance_to_reckoning_in_seconds = (self.day_of_reckoning - self.df.time.iloc[0]).total_seconds() 
+        self.total_distance_to_reckoning_in_seconds = total_distance_to_reckoning_in_seconds
+        lags_to_reckoning = round(self.total_distance_to_reckoning_in_seconds/self.lag_in_seconds) # unit is lags
         self.lags_to_reckoning = lags_to_reckoning
+        # available data current timeframe size
 
-        times = pd.Series([self.df.time.iloc[0] + timedelta(days=lag)*i for i in range(nlags)] )
+        # number of lag time intervals inside of current timeframe
+        nlags =  round(self.total_time_in_df/self.lag_in_seconds)
+        self.lags_to_timecut = nlags
 
+        times = pd.Series([self.df.time.iloc[0] + timedelta(days=self.lag)*i for i in range(nlags)] )
         self.times = times
 
         return self
@@ -139,24 +143,23 @@ class ProbabilityAnalysis:
 
         return self
 
-    def get_all_t0_t_whose_difference_is_lagsize(self, d , slide_lag = 24*3600 ):
+    def get_all_t0_t_whose_difference_is_lagsize(self, d, time_cut, slide_lag = 24*3600 ):
         """
         Where m is posts per d based on politician rate
         """
-    
-        t0_t_pairs = []
 
+        t0_t_pairs = []
         i = 0
 
-        while self.times.iloc[0] + timedelta(seconds = i) < self.times.iloc[-1]:
+        while self.times.iloc[0] + timedelta(seconds = i) < time_cut:
 
-            t0_t_pairs.append((self.times[0] + timedelta(seconds = i), self.times[0] + timedelta(seconds = i) + timedelta(seconds = 24*3600*d)))
+            t0_t_pairs.append((self.times[0] + timedelta(seconds = i), self.times[0] + timedelta(seconds = d + i) ))
             i += slide_lag
 
         return t0_t_pairs
 
 
-    def get_post_trajectories_size_d_lags(self, d):
+    def get_post_trajectories_size_d_lags(self, d,  time_cut):
         """
         Get all different trajectories of opinions for a single politician.
 
@@ -172,7 +175,7 @@ class ProbabilityAnalysis:
 
         from_politician_to_d_chopped_series = {i:[] for i in ids }
 
-        t0_t_pairs = self.get_all_t0_t_whose_difference_is_lagsize(d)
+        t0_t_pairs = self.get_all_t0_t_whose_difference_is_lagsize(d, time_cut)
 
         print('running sliding window')
         
@@ -203,27 +206,33 @@ class ProbabilityAnalysis:
         self.l = l
         self.delta = delta
 
-        self = self.get_post_trajectories_size_d_lags( self.lags_to_reckoning)
-
-        list_probable_statements_after_t = self.from_politician_to_d_chopped_series[id_politico]
-        list_probable_statements_after_t = list(list_probable_statements_after_t)      
-
-        all_politician_i_statements = crop_all_statements_per_politician(self.df, id_politico)
-
-        from_time_cut_to_probability={}
+        from_time_cut_to_probability = {}
 
         for n, time_ in tqdm(enumerate(self.times)):
 
+            d = self.total_distance_to_reckoning_in_seconds - self.lag_in_seconds * n
+
+            if d > (time_ - self.df.time[0]).total_seconds()  : 
+                print("distance to reckoning is greater than total time in current iteration of time_cut " + str(time_))
+                continue
+
+            all_politician_i_statements_until_timecut = crop_statements_until_t_by_politician(self.df, id_politician = id_politico, t =  time_)
+            
+            self = self.get_post_trajectories_size_d_lags( d  = d, time_cut = time_)
+
+            list_probable_statements_after_t = self.from_politician_to_d_chopped_series[id_politico] # make per politician
+            list_probable_statements_after_t = list(list_probable_statements_after_t)      
+            
             all_trajectories = 0
             A_trajectories = 0
             O_trajectories = 0
 
             for statements_in_d in  list_probable_statements_after_t:
 
-                total_statements = all_politician_i_statements + statements_in_d
+                total_statements = all_politician_i_statements_until_timecut + statements_in_d
         
                 if delta_method ==  'dynamic':
-                    P = Model(total_statements,self.l, self.delta).runlite_dynamic( self.lags_to_reckoning - n, self.lags_to_reckoning)
+                    P = Model(total_statements,self.l, self.delta).runlite_dynamic( 0, self.lags_to_reckoning)
                 if delta_method ==  'static':
                     P = Model(total_statements,self.l, self.delta).runlite()
 
@@ -236,7 +245,7 @@ class ProbabilityAnalysis:
 
             from_time_cut_to_probability[time_] = set_probability
 
-        return   from_time_cut_to_probability, A_trajectories, O_trajectories, all_trajectories, set_probability
+        return   from_time_cut_to_probability#, A_trajectories, O_trajectories, all_trajectories, set_probability
     
     
     def calculate_approval_probability(self,  l, delta, delta_method =  'dynamic'):
