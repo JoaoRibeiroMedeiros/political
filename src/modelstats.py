@@ -163,8 +163,8 @@ class ModelStats:
                 if delta_method ==  'static':
                     P = Model(statements,l, delta).runlite()
 
-                politician_opinion = PoliticianOpinion(id_politico, P)
-                from_politician_to_opinion_history[id_politico].append(P)
+                politician_opinion = PoliticianOpinion(int(id_politico), P)
+                from_politician_to_opinion_history[int(id_politico)].append(P)
                 politician_opinion_list.append(politician_opinion)
                 # statements, id_politico = elem
 
