@@ -79,18 +79,54 @@ def create_legend():
 
     return legend_elements
 
+def create_custom_legend_and_cmap():
+        """
+        Creates a custom legend and colormap for visualizing data.
+
+        This function defines a custom colormap with specific colors and corresponding
+        boundaries. It also creates a list of legend elements to be used in plots.
+
+        Returns:
+            tuple: A tuple containing:
+                - legend_elements (list): A list of matplotlib.patches.Patch objects representing the legend.
+                - custom_cmap (matplotlib.colors.ListedColormap): The custom colormap.
+                - norm (matplotlib.colors.BoundaryNorm): The normalization object to map data values to colormap.
+
+        Note:
+            The `norm` object is used to map data values to the defined colormap boundaries.
+        """
+        # Define custom colors
+        custom_cmap = plt.cm.colors.ListedColormap(['red', 'gray', 'brown', 'green'])
+
+        bounds = [-1, 0, 0.5, 1]
+
+        norm = plt.cm.colors.BoundaryNorm(bounds, custom_cmap.N)
+
+        # Create list of Legend elements
+        legend_elements = [
+            Patch(facecolor='red', edgecolor='k', label='Against'),
+            Patch(facecolor='gray', edgecolor='k', label='Silent'),
+            Patch(facecolor='brown', edgecolor='k', label='Neutral'),
+            Patch(facecolor='green', edgecolor='k', label='In favour')
+        ]
+
+        return legend_elements, custom_cmap, norm
+
 def animate_ordered(Plista, times):
     fig = plt.figure()
     camera = Camera(fig)
 
+    legend_elements, custom_cmap, norm = create_custom_legend_and_cmap()
+
     for i, _time in enumerate(times):
-        plt.imshow(np.sort(create_visualization(Plista, _time)), cmap='magma', vmin=-1, vmax=1)
+        plt.imshow(np.sort(create_visualization(Plista, _time)), cmap=custom_cmap, norm=norm)
         plt.xticks([])  # Hide x-axis ticks
         plt.yticks([])  # Hide y-axis ticks
         camera.snap()
 
     # Add legend to the plot
-    legend_elements = create_legend()
+    
+
     plt.legend(handles=legend_elements, loc='upper right', bbox_to_anchor=(1.15, 1))
 
     animation = camera.animate()
