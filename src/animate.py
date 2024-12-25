@@ -115,7 +115,23 @@ def animate_unordered(Plista, times):
     animation = camera.animate()
     animation.save('modeldynamic.gif', writer='pillow')
 
+def make_party_viz(serie_A, serie_K, serie_O, times_):
 
+    opinion_list_in_time = {} # silent is zero 
+
+    for n , t in enumerate(times_):
+        opinion_list = []
+
+        opinion_list += serie_A[n]*[1]
+        opinion_list += serie_K[n]*[0]
+        opinion_list += serie_O[n]*[-1]
+
+        opinion_list = np.sort(opinion_list)
+
+        opinion_list_in_time[t]=opinion_list
+
+    return opinion_list_in_time
+        
 
 def animate_party(Plista, times, party):
     fig = plt.figure()
