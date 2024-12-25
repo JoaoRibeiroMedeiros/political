@@ -23,28 +23,40 @@ def create_visualization(Plista,t):
     return mapa
 
 
-def animate_unordered(Plista):
+
+def create_party_visualization(Plista,t):
+
+    mapa = np.zeros((5,5)) # silent is zero 
+    
+    k=0
+    j=0
+    for i in Plista[t]:
+        
+        if(k%5 ==0 and k!=0):
+            k = 0
+            j += 1
+        if i == 0:
+            mapa[k][j] = 0.5    # zero is 0.5
+        else:
+            mapa[k][j] = i    # 1 is 1, -1 is -1
+        k += 1
+    
+    return mapa
+
+
+
+
+def animate_unordered_(Plista):
 
     for i in range(5,120,5):
         #plt.imshow(np.sort( create_visualization(Plista,i)))
         plt.imshow( create_visualization(Plista,i), cmap = 'magma')
         plt.savefig('partisanloc' + str(i)+'.png')
 
-def animate_ordered_(Plista):
-    for i in range(5,120,5):
-        plt.imshow(np.sort( create_visualization(Plista,i)), cmap = 'magma')
-        #plt.imshow( create_visualization(Plista,i))
-        plt.savefig('partisan' + str(i)+'.png')
 
-# def animate_ordered(Plista):
-#     fig = plt.figure()
-#     camera = Camera(fig)
-#     for i in range(5,120,5):
-#         print(i)
-#         #plt.imshow(np.sort( create_visualization(Plista,i)))
-#         plt.imshow( np.sort(create_visualization(Plista,i)), cmap = 'magma')
-#         camera.snap()
-#   import matplotlib.pyplot as plt
+
+
+
 from matplotlib.patches import Patch
 from celluloid import Camera
 import numpy as np
@@ -83,3 +95,42 @@ def animate_ordered(Plista, times):
 
     animation = camera.animate()
     animation.save('sortedmodeldynamic.gif', writer='pillow')
+
+
+
+def animate_unordered(Plista, times):
+    fig = plt.figure()
+    camera = Camera(fig)
+
+    for i, _time in enumerate(times):
+        plt.imshow(create_visualization(Plista, _time), cmap='magma', vmin=-1, vmax=1)
+        plt.xticks([])  # Hide x-axis ticks
+        plt.yticks([])  # Hide y-axis ticks
+        camera.snap()
+
+    # Add legend to the plot
+    legend_elements = create_legend()
+    plt.legend(handles=legend_elements, loc='upper right', bbox_to_anchor=(1.15, 1))
+
+    animation = camera.animate()
+    animation.save('modeldynamic.gif', writer='pillow')
+
+
+
+def animate_party(Plista, times, party):
+    fig = plt.figure()
+    camera = Camera(fig)
+
+    for i, _time in enumerate(times):
+        plt.imshow(np.sort(create_party_visualization(Plista, _time)), cmap='magma', vmin=-1, vmax=1)
+        plt.xticks([])  # Hide x-axis ticks
+        plt.yticks([])  # Hide y-axis ticks
+        plt.title(f"{party} opinion evolution")
+        camera.snap()
+
+    # Add legend to the plot
+    legend_elements = create_legend()
+    plt.legend(handles=legend_elements, loc='upper right', bbox_to_anchor=(1.15, 1))
+
+    animation = camera.animate()
+    animation.save(f'{party}_modeldynamic.gif', writer='pillow')
