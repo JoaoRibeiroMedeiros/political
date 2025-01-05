@@ -1,5 +1,3 @@
-
-
 import numpy as np
 import pandas as pd
 import time
@@ -190,8 +188,35 @@ class ProbabilityAnalysis:
 
         return self
 
-    def dynamic_programming(p_list, n):
+    def probability_calculation_dynamic_programming(p_list, n):
+        """
+        Calculates the probability of getting at least n successes from a series of independent events
+        with different probabilities using dynamic programming.
 
+        This function uses a dynamic programming approach to efficiently compute the probability
+        by building up solutions to subproblems. For each probability p in p_list, it updates
+        the probability of having exactly i successes using the formula:
+        dp[i] += p * (dp[i-1] - dp[i])
+
+        Parameters:
+        -----------
+        p_list : list[float]
+            List of probabilities for each independent event, where each p is between 0 and 1
+        n : int
+            The minimum number of successes required (threshold)
+
+        Returns:
+        --------
+        float
+            The probability of getting at least n successes across all events
+
+        Example:
+        --------
+        >>> p_list = [0.5, 0.5, 0.5]  # Three coin flips
+        >>> n = 2
+        >>> probability_calculation_dynamic_programming(p_list, n)
+        0.375  # Probability of getting at least 2 heads in 3 coin flips
+        """
         N = len(p_list)
         dp = [0] * (N + 1)
         dp[0] = 1
