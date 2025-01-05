@@ -179,7 +179,8 @@ class ProbabilityAnalysis:
 
         print('running sliding window')
         
-        for (t0, t) in tqdm(t0_t_pairs):
+        # for (t0, t) in tqdm(t0_t_pairs):
+        for (t0, t) in t0_t_pairs:
             for elem in crop_statements_from_t0_to_t(self.df,t0,t):
 
                 statements, id_politico = elem
