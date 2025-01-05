@@ -140,14 +140,15 @@ def animate_unordered(Plista, times):
     fig = plt.figure()
     camera = Camera(fig)
 
+    legend_elements, custom_cmap, norm = create_custom_legend_and_cmap()
+
     for i, _time in enumerate(times):
-        plt.imshow(create_visualization(Plista, _time), cmap='magma', vmin=-1, vmax=1)
+        plt.imshow(create_visualization(Plista, _time), cmap=custom_cmap, norm=norm)
         plt.xticks([])  # Hide x-axis ticks
         plt.yticks([])  # Hide y-axis ticks
         camera.snap()
 
     # Add legend to the plot
-    legend_elements = create_legend()
     plt.legend(handles=legend_elements, loc='upper right', bbox_to_anchor=(1.15, 1))
 
     animation = camera.animate()
@@ -172,18 +173,45 @@ def make_party_viz(serie_A, serie_K, serie_O, times_):
         
 
 def animate_party(Plista, times, party):
+    """
+    Creates an animation showing how politicians' opinions within a party evolve over time
+    regarding a specific matter to be voted in congress.
+
+    Parameters:
+    -----------
+    Plista : list[list[int]]
+        List of politician opinions for each time point, where each opinion is:
+        1 for approval
+        0 for neutral/silent
+        -1 for opposition
+    times : list[datetime]
+        List of datetime objects corresponding to each measurement of opinions
+    party : str
+        Name of the political party whose opinions are being animated
+
+    Returns:
+    --------
+    matplotlib.animation.Animation
+        Animation showing the evolution of opinions within the party over time.
+        The visualization uses a 5x5 grid where each cell represents a politician,
+        colored according to their position:
+        - Red: Against (-1)
+        - Gray: Silent (0)
+        - Green: In favor (1)
+    """
     fig = plt.figure()
     camera = Camera(fig)
 
+    legend_elements, custom_cmap, norm = create_custom_legend_and_cmap()
+
     for i, _time in enumerate(times):
-        plt.imshow(np.sort(create_party_visualization(Plista, _time)), cmap='magma', vmin=-1, vmax=1)
+        plt.imshow(np.sort(create_party_visualization(Plista, _time)), cmap=custom_cmap, norm=norm)
         plt.xticks([])  # Hide x-axis ticks
         plt.yticks([])  # Hide y-axis ticks
         plt.title(f"{party} opinion evolution")
         camera.snap()
 
     # Add legend to the plot
-    legend_elements = create_legend()
     plt.legend(handles=legend_elements, loc='upper right', bbox_to_anchor=(1.15, 1))
 
     animation = camera.animate()
