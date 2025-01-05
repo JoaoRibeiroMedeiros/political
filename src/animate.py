@@ -98,7 +98,7 @@ def create_custom_legend_and_cmap():
         # Define custom colors
         custom_cmap = plt.cm.colors.ListedColormap(['red', 'gray', 'brown', 'green'])
 
-        bounds = [-1, 0, 0.5, 1]
+        bounds = [-1.1, -0.1, 0.4, 0.6,1.1]
 
         norm = plt.cm.colors.BoundaryNorm(bounds, custom_cmap.N)
 
@@ -113,19 +113,21 @@ def create_custom_legend_and_cmap():
         return legend_elements, custom_cmap, norm
 
 def animate_ordered(Plista, times):
+
     fig = plt.figure()
+
     camera = Camera(fig)
 
     legend_elements, custom_cmap, norm = create_custom_legend_and_cmap()
 
     for i, _time in enumerate(times):
+
         plt.imshow(np.sort(create_visualization(Plista, _time)), cmap=custom_cmap, norm=norm)
         plt.xticks([])  # Hide x-axis ticks
         plt.yticks([])  # Hide y-axis ticks
         camera.snap()
 
     # Add legend to the plot
-    
 
     plt.legend(handles=legend_elements, loc='upper right', bbox_to_anchor=(1.15, 1))
 
