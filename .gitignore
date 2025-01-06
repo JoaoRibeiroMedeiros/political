@@ -13,6 +13,7 @@ requirements_gr.txt
 app_gradio.py
 deploy
 src/docs/DataInfrastructure.drawio
+flagged/X_API_keys.yaml
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode,git
