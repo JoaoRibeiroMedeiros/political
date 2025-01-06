@@ -175,7 +175,7 @@ class ProbabilityAnalysis:
 
         t0_t_pairs = self.get_all_t0_t_whose_difference_is_lagsize(d, time_cut)
 
-        print('running sliding window')
+        # print('running sliding window')
         
         # for (t0, t) in tqdm(t0_t_pairs):
         for (t0, t) in t0_t_pairs:
@@ -239,7 +239,7 @@ class ProbabilityAnalysis:
             d = self.total_distance_to_reckoning_in_seconds - self.lag_in_seconds * n
 
             if d > (time_ - self.df.time[0]).total_seconds()  : 
-                print("distance to reckoning is greater than total time in current iteration of time_cut " + str(time_))
+                #print("distance to reckoning is greater than total time in current iteration of time_cut " + str(time_))
                 continue
 
             all_politician_i_statements_until_timecut = crop_statements_until_t_by_politician(self.df, id_politician = id_politico, t =  time_)
