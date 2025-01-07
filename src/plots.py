@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -180,6 +179,54 @@ def plot_prob_evolution(from_time_cut_to_probability, date_of_reckoning, name):
     plt.xticks(rotation=45)
 
     # Adjust layout to fit elements
+    plt.tight_layout()
+
+    # Show the plot
+    plt.show()
+
+
+def plot_approval_prob_evolution(from_time_cut_to_probability, date_of_reckoning, name):
+    """
+    Plot the evolution of approval probabilities over time with fixed y-axis limits.
+
+    Parameters:
+    -----------
+    from_time_cut_to_probability : dict
+        Dictionary mapping dates to probability values
+    date_of_reckoning : datetime
+        The date of the actual vote
+    name : str
+        Title prefix for the plot
+    """
+    # Extract dates and probabilities for plotting
+    dates = list(from_time_cut_to_probability.keys())
+    probabilities = [from_time_cut_to_probability[date] for date in dates]
+
+    # Create the plot
+    plt.figure(figsize=(12, 6))
+
+    # Plot Approval probabilities with a darker green color
+    plt.plot(dates, probabilities, label='Approval Probability', marker='o', color='#228B22')  # ForestGreen
+
+    # Add the vertical line for the date of reckoning
+    plt.axvline(x=date_of_reckoning, color='r', linestyle='--', label='Date of Reckoning')
+
+    # Set labels and title
+    plt.xlabel('Date')
+    plt.ylabel('Probability')
+    plt.title(f'{name} - Time Series of Approval Probabilities')
+
+    # Set y-axis limits between 0 and 1
+    plt.ylim(0, 1)
+
+    # Add legend and grid
+    plt.legend()
+    plt.grid(True)
+
+    # Rotate x-axis labels for better readability
+    plt.xticks(rotation=45)
+
+    # Adjust layout to prevent label cutoff
     plt.tight_layout()
 
     # Show the plot
