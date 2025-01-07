@@ -7,16 +7,12 @@ This work is the result of a collaboration between Heitor Ponchio and João Mede
 
 ## Visualizations
 
-### All Politicians (Unordered)
-![Unordered Opinion Evolution](plots/modeldynamic.gif)
-*Evolution of all politicians' opinions shown in an 18x18 grid*
-
 ### All Politicians (Sorted)
 ![Sorted Opinion Evolution](plots/sortedmodeldynamic.gif)
 *Evolution of all politicians' opinions, sorted by position*
 
 ### Party-Specific Evolution
-![Party Opinion Evolution](plots/party_modeldynamic.gif)
+![Party Opinion Evolution](plots/MDB_modeldynamic.gif)
 *Evolution of opinions within a specific party shown in a 5x5 grid*
 
 ### Color Legend
