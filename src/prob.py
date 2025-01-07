@@ -80,7 +80,7 @@ class ProbabilityAnalysis:
     
     def get_timeframes(self, lag, day_of_reckoning):
 
-        self.df = self.df[self.df['time'] < self.day_of_reckoning] # make sure that we disregard any data after the day of reckoning
+        self.df = self.df[self.df['time'] < day_of_reckoning] # make sure that we disregard any data after the day of reckoning
 
         self.total_time_in_df = (max(self.df['time']) - min(self.df['time'])).total_seconds()
         self.lag = lag 
