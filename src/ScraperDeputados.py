@@ -12,7 +12,7 @@ from selenium.webdriver.common.keys import Keys
 
 
 
-def ScrapaDeputados2018(deputados,username, senha):
+def ScrapaDeputados2018(deputados, username, senha):
     
     deputadas = []
     for i in deputados.Nome:
@@ -45,7 +45,7 @@ def ScrapaDeputados2018(deputados,username, senha):
     nomes = []
     handles = []
 
-    for i in deputadosp.Nome:
+    for i in deputados.Nome:
 
         #clica em busca
 
