@@ -111,6 +111,8 @@ class ModelStats:
     
     def get_timeframes(self, lag, day_of_reckoning):
 
+        self.df = self.df[self.df['time'] < self.day_of_reckoning] # make sure that we disregard any data after the day of reckoning
+
         # current timeframe size
         total_distance =  (self.df.time.iloc[-1] - self.df.time.iloc[0]).total_seconds() 
 

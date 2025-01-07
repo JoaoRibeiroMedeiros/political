@@ -20,7 +20,7 @@ def lags_from_td(delta, lag):
     return days
 
 
-class InitializeFramework :
+class PoliticianStatements :
 
     def __init__(self, path, deputados_path, simulate = False, simulate_time = None):
 

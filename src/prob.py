@@ -36,6 +36,7 @@ class ProbabilityAnalysis:
         self.lag = lag 
         self.lag_in_seconds = timedelta(days=self.lag).total_seconds()
         self.day_of_reckoning = day_of_reckoning
+        self.df = self.df[self.df['time'] < self.day_of_reckoning] # make sure that we disregard any data after the day of reckoning
         total_distance_to_reckoning_in_seconds = (self.day_of_reckoning - self.df.time.iloc[0]).total_seconds() 
         self.total_distance_to_reckoning_in_seconds = total_distance_to_reckoning_in_seconds
         lags_to_reckoning = round(self.total_distance_to_reckoning_in_seconds/self.lag_in_seconds) # unit is lags
@@ -98,8 +99,8 @@ class ProbabilityAnalysis:
 
         return self
     
-    def get_high_statement_volatility_politicians(self):
-        high_volatility_ids = [int(i ) for i, v in self.from_politician_to_volatility.items() if 0.5 < v < 1]
+    def get_high_statement_volatility_politicians(self, volatility_threshold = 0.5):
+        high_volatility_ids = [int(i ) for i, v in self.from_politician_to_volatility.items() if volatility_threshold < v ]
         return high_volatility_ids
 
     def get_high_statement_volatility_info(self):
