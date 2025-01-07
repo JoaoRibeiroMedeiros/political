@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import time
 from tqdm import tqdm
-from src.crop import   (crop_statements_until_t,
+from src.load import   (crop_statements_until_t,
                    crop_statements_from_t0_to_t, 
                    crop_statements_until_t_by_politician, 
                    crop_all_statements,crop_all_statements_per_politician)

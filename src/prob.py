@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import time
 from tqdm import tqdm
-from src.crop import   (crop_statements_until_t,
+from src.load import   (crop_statements_until_t,
                    crop_statements_from_t0_to_t, 
                    crop_statements_until_t_by_politician, 
                    crop_all_statements,crop_all_statements_per_politician)
@@ -191,7 +191,7 @@ class ProbabilityAnalysis:
 
         return self
 
-    def probability_calculation_dynamic_programming(p_list, approval_threshold):
+    def probability_calculation_dynamic_programming(self, p_list, approval_threshold):
         """
         Calculates the probability of getting at least n successes from a series of independent events
         with different probabilities using dynamic programming.
@@ -221,76 +221,77 @@ class ProbabilityAnalysis:
         0.375  # Probability of getting at least 2 heads in 3 coin flips
         """
         N = len(p_list)
-        dp = [0] * (N + 1)
-        dp[0] = 1
-        
+        dp = [0.0] * (N + 1)
+        dp[0] = 1.0  # Probability of zero successes
+
         for p in p_list:
+            # Update the dp array in reverse order
             for i in range(N, 0, -1):
-                dp[i] += p * (dp[i-1] - dp[i])
-        
+                dp[i] = dp[i] * (1 - p) + dp[i - 1] * p
+            dp[0] *= (1 - p)  # Update probability of zero successes as well
+
+        # Return the summed probabilities of achieving at least `approval_threshold` successes
         return sum(dp[approval_threshold:])
     
-    def calculate_probabilities_for_each_timestamp(self, from_politician_to_prob_time_series, approval_threshold):
+    def construct_probability_list(self, from_politician_to_prob_time_series, timestamp):
+        """
+        Constructs a list of probabilities for all politicians at a given timestamp.
+        
+        Parameters:
+        -----------
+        from_politician_to_prob_time_series : dict
+            Nested dictionary containing timestamps and their corresponding probabilities.
+        timestamp : Timestamp
+            The specific timestamp for which to gather probabilities.
+            
+        Returns:
+        --------
+        list
+            A list of probabilities for all politicians at the given timestamp.
+        """
+        p_list = []
+        
+        for timestamps in from_politician_to_prob_time_series.values():
+            if timestamp in timestamps:
+                probabilities = timestamps[timestamp]
+                p_list.extend(probabilities.values())
+        
+        return p_list
+
+    def calculate_approval_probability_for_each_timestamp(self, from_politician_to_prob_time_series, approval_threshold):
         """
         Calculates the probability at each timestamp using the given dynamic programming algorithm.
         
         Parameters:
         -----------
         from_politician_to_prob_time_series : dict
-            Nested dictionary containing timestamps and their corresponding probabilities.
-        n : int
-            The minimum number of successes required (threshold).
-            
-        Returns:
-        --------
-        dict
-            A dictionary with keys as politician IDs (e.g., 477, 470) and lists of calculated probabilities 
-            for each timestamp as values.
-        """
-        results = {}
-        
-        # Iterate over each set of timestamps and probabilities
-        for id_politician, timestamps in from_politician_to_prob_time_series.items():
-            # Create a list to store probabilities for each timestamp for this politician ID
-            results[id_politician] = []
-            
-            # Iterate over each timestamp
-            for timestamp, probabilities in timestamps.items():
-                p_list = list(probabilities.values())
-                probability = self.probability_calculation_dynamic_programming(p_list, approval_threshold)
-                results[id_politician].append((timestamp, probability))
-                
-        return results
-
-
-    def calculate_total_probability(self, from_politician_to_prob_time_series, approval_threshold):
-        """
-        Calculates the total probability for each politician ID in the data structure.
-        
-        Uses the probabilities calculated for each timestamp.
-        
-        Parameters:
-        -----------
-        from_politician_to_prob_time_series : dict
-            Nested dictionary containing timestamps and their corresponding probabilities.
+            Nested dictionary containing timestamps and their corresponding probability time series.
         approval_threshold : int
             The minimum number of successes required (threshold).
             
         Returns:
         --------
         dict
-            A dictionary with keys as politician IDs (e.g., 477, 470) and the total probability as values.
+            A dictionary with keys as timestamps and the calculated probabilities as values.
         """
-        results_per_timestamp = self.calculate_probabilities_for_each_timestamp(from_politician_to_prob_time_series, approval_threshold)
-        total_results = {}
+        results = {}
+        all_timestamps = set()
         
-        for id_politician, probabilities in results_per_timestamp.items():
-            # Extract only the probability values, ignoring timestamps
-            probability_values = [prob for _, prob in probabilities]
-            total_results[id_politician] = sum(probability_values)
+        # Collect all unique timestamps from the data structure
+        for timestamps in from_politician_to_prob_time_series.values():
+            all_timestamps.update(timestamps.keys())
+        
+        # Iterate over each unique timestamp
+        for timestamp in sorted(all_timestamps):
+            p_list = self.construct_probability_list(from_politician_to_prob_time_series, timestamp)
+            print("list of voting in favor probabilities: ", p_list)
             
-        return total_results
-    
+            # Calculate probability using dynamic programming
+            probability = self.probability_calculation_dynamic_programming(p_list, approval_threshold)
+            results[timestamp] = probability  # Store the result with the timestamp as key
+        
+        return results
+
     def get_politician_probability_evolution(self, l, delta, id_politico,  delta_method =  'dynamic'):
 
         self.l = l
@@ -331,7 +332,7 @@ class ProbabilityAnalysis:
 
                 all_trajectories += 1
 
-            set_probability = {'A': A_trajectories/all_trajectories, 'O': O_trajectories/all_trajectories }
+            set_probability = {'A': round(A_trajectories/all_trajectories, 2), 'O': round(O_trajectories/all_trajectories, 2)    }
 
             from_time_cut_to_probability[time_] = set_probability
 

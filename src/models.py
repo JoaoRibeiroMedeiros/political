@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import time
 from tqdm import tqdm
-from src.crop import crop_statements_until_t
+from src.load import crop_statements_until_t
 from dataclasses import dataclass
 from datetime import datetime
 
